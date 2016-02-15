@@ -2,6 +2,7 @@ package cont;
 import bll.Funk;
 import bll.IFunk;
 import dal.Data;
+import dal.IData.DataException;
 import io.IIo;
 import io.IoGui;
 import io.IoTxt;
@@ -25,7 +26,11 @@ public class Cont {
 		String cpr = "";
 			io.skriv("Indtast cpr-nr: ");
 			cpr=io.laes();    
-			io.skriv(funk.getNavn(cpr) + " " + funk.getTextualBMI(cpr));
+			try {
+				io.skriv(funk.getNavn(cpr) + " " + funk.getTextualBMI(cpr));
+			} catch (DataException e) {
+				io.skriv("Bruger findes ikke!");
+			}
 			io.close();
 	}
 	

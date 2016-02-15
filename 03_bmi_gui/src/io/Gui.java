@@ -3,6 +3,8 @@ package io;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import dal.IData.DataException;
 	
 	public class Gui implements ActionListener{
 		
@@ -47,7 +49,12 @@ import javax.swing.*;
 		
 		public void actionPerformed(ActionEvent e){
 			String cpr= cprnr.getText();      // læser
-			String bmi= f.getTextualBMI(cpr); //brufer f
+			String bmi;
+			try {
+				bmi = f.getTextualBMI(cpr);
+			} catch (DataException e1) {
+				bmi = "Person findes ikke";
+			} //brufer f
 			userid.setText("BMI: "+ bmi);     // skriver
 			
 		}

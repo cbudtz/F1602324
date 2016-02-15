@@ -1,8 +1,7 @@
 package dal;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import dal.IData;
+import dal.IData.DataException;
 
 public class Data implements IData {
 
@@ -22,37 +21,37 @@ public class Data implements IData {
 	}
 
 	//Returner personens navn
-	public String getNavn(String cpr){
+	public String getNavn(String cpr) throws DataException{
 		for (int i= 0; ; i++){
 			try {
 				if (personer.get(i).cpr.equals(cpr))
 					return personer.get(i).navn;
 			} catch (IndexOutOfBoundsException e){
 				System.err.println("Personen findes ikke");
-				return null;
+				throw new DataException();
 			}
 		}
 	}
 
 	//Returner personens vægt
-	public double getVaegt(String cpr){
+	public double getVaegt(String cpr) throws DataException{
 		for (int i= 0; ; i++)
 			try {
 				if (personer.get(i).cpr.equals(cpr))
 					return personer.get(i).vaegt;
 			} catch (IndexOutOfBoundsException e){
-				return -1;
+				throw new DataException();
 			}
 	}
 
 	//Returner personens højde
-	public double getHoejde(String cpr){
+	public double getHoejde(String cpr) throws DataException{
 		for (int i= 0; ; i++)
 			try {
 				if (personer.get(i).cpr.equals(cpr))
 					return personer.get(i).hoejde;
 			} catch (IndexOutOfBoundsException e){
-				return -1;
+				throw new DataException();
 			}
 	}
 
